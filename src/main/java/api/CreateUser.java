@@ -1,7 +1,7 @@
 package api;
 ////
 public class CreateUser {
-
+//
     private String email;
     private String password;
     private String name;
