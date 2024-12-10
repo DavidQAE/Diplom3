@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import static testdata.UserData.*;
 
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.junit.Assert.assertFalse;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 public class RegisterPageBurger extends BaseUrl {
 
     private  WebDriver driver;
-    Delete delete = new Delete();
+
 
 
     public void clickElement(By locator) {
@@ -41,6 +42,8 @@ public class RegisterPageBurger extends BaseUrl {
 
     private By registerButton = By.xpath(".//button[contains(text(), 'Зарегистрироваться')]");
 
+    private By wrongPasswordMessage = By.xpath("//p[contains(text(), 'Некорректный пароль')]");
+
 
 
 
@@ -55,18 +58,13 @@ public class RegisterPageBurger extends BaseUrl {
 
     clickElement(loginPageRegisterLink);
 
-    input(registerNameField, "Ивана");
-    input(registerEmailField, "TestDave5@mail.ru");
-    input(registerPasswordField, "Tester1234323");
+    input(registerNameField, name);
+    input(registerEmailField, email);
+    input(registerPasswordField, password);
     clickElement(registerButton);
 
 
 
-    WebDriverWait wait = new WebDriverWait(driver, 5);
-    WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
-    assertTrue("Элемент не отобразился", element.isDisplayed());
-
-       delete.deleteUser();
    }
 
 
@@ -76,14 +74,10 @@ public class RegisterPageBurger extends BaseUrl {
 
        clickElement(loginPageRegisterLink);
 
-       input(registerNameField, "Давид");
-       input(registerEmailField, "TestDave@mail.ru");
-       input(registerPasswordField, "2222");
+       input(registerNameField, name);
+       input(registerEmailField, email);
+       input(registerPasswordField, wrongPassword);
        clickElement(registerButton);
-
-       WebDriverWait wait = new WebDriverWait(driver, 5);
-       WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(), 'Некорректный пароль')]")));
-       assertTrue(element.isDisplayed());
 
    }
 
@@ -106,8 +100,12 @@ public class RegisterPageBurger extends BaseUrl {
 
 
 
+    public By getLoginButton() {
+        return loginButton;
+    }
 
-
-
+    public By getWrongPasswordMessage() {
+        return wrongPasswordMessage;
+    }
 
 }

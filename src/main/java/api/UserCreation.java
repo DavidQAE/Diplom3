@@ -2,10 +2,10 @@ package api;
 //
 public class UserCreation extends BaseUrl{
 
-    public void createUser() {
+    public void createUser(String email, String name, String password) {
         UserClient userClient = new UserClient();
         CreateUser createUser = new CreateUser().
-                withEmail("TestDave5@mail.ru").withName("Гном150").withPassword("Tester1234323");
+                withEmail(email).withName(name).withPassword(password);
         userClient.create(createUser);
     }
 

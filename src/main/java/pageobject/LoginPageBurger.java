@@ -10,12 +10,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.apache.commons.lang3.RandomStringUtils.random;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
+import static testdata.UserData.*;
 public class LoginPageBurger {
 
     private  WebDriver driver;
-    Delete delete = new Delete();
-UserCreation userCreation = new UserCreation();
+
 
     public void clickElement(By locator) {
         driver.findElement(locator).click();
@@ -48,6 +47,8 @@ UserCreation userCreation = new UserCreation();
 
     private By recoveryPageloginLink = By.xpath(".//a[contains(text(), 'Войти')]");
 
+    private By orderButton = By.xpath("//button[contains(text(), 'Оформить заказ')]");
+
 
 
 
@@ -59,74 +60,68 @@ UserCreation userCreation = new UserCreation();
 
    public void loginThroughHomePageButton() {
 
-       userCreation.createUser();
-
        clickElement(constructorLoginButton);
 
-       input(loginEmailField, "TestDave5@mail.ru");
-       input(loginPasswordField, "Tester1234323");
+       input(loginEmailField, email);
+       input(loginPasswordField, password);
        clickElement(loginButton);
 
-       WebDriverWait wait = new WebDriverWait(driver, 5);
-       WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'Оформить заказ')]")));
-       assertTrue("Не удалось залогиниться", element.isDisplayed());
-
-       delete.deleteUser();
 
    }
 
 
    public void loginThroughHeaderButton() {
-        userCreation.createUser();
+
 
         clickElement(headerLoginButton);
 
-       input(loginEmailField, "TestDave5@mail.ru");
-       input(loginPasswordField, "Tester1234323");
+       input(loginEmailField, email);
+       input(loginPasswordField, password);
        clickElement(loginButton);
 
-       WebDriverWait wait = new WebDriverWait(driver, 5);
-       WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'Оформить заказ')]")));
-       assertTrue("Не удалось залогиниться", element.isDisplayed());
 
-       delete.deleteUser();
+
+
    }
 
 
     public void loginThroughLink() {
-        userCreation.createUser();
+
 
         clickElement(constructorLoginButton);
         clickElement(loginPageRegisterLink);
         clickElement(registerPageloginLink);
 
-        input(loginEmailField, "TestDave5@mail.ru");
-        input(loginPasswordField, "Tester1234323");
+        input(loginEmailField, email);
+        input(loginPasswordField, password);
         clickElement(loginButton);
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'Оформить заказ')]")));
-        assertTrue("Не удалось залогиниться", element.isDisplayed());
 
-        delete.deleteUser();
+
+
     }
 
     public void loginThroughRecoveryLink() {
-        userCreation.createUser();
+
 
         clickElement(constructorLoginButton);
         clickElement(loginPasswordRecoverLink);
         clickElement(recoveryPageloginLink);
 
-        input(loginEmailField, "TestDave5@mail.ru");
-        input(loginPasswordField, "Tester1234323");
+        input(loginEmailField, email);
+        input(loginPasswordField, password);
         clickElement(loginButton);
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//button[contains(text(), 'Оформить заказ')]")));
-        assertTrue("Не удалось залогиниться", element.isDisplayed());
 
-        delete.deleteUser();
+
+
+    }
+
+
+
+
+    public By getOrderButton() {
+        return orderButton;
     }
 
 }

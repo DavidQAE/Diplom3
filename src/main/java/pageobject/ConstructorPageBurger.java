@@ -3,17 +3,19 @@ package pageobject;
 import api.Delete;
 import api.UserCreation;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
+import static testdata.UserData.email;
+import static testdata.UserData.password;
+import static testdata.UserData.name;
 
 public class ConstructorPageBurger {
     private WebDriver driver;
-    Delete delete = new Delete();
-    UserCreation userCreation = new UserCreation();
 
     public void clickElement(By locator) {
         driver.findElement(locator).click();
@@ -53,6 +55,12 @@ public class ConstructorPageBurger {
 
     private By loginPasswordField = By.name("Пароль");
 
+    private By sauceImage = By.xpath(".//img[@alt='Соус Spicy-X']");
+
+    private By bunImage = By.xpath(".//img[@alt='Флюоресцентная булка R2-D3']");
+
+    private By fillingImage = By.xpath(".//img[@alt='Сыр с астероидной плесенью']");
+
 
 
 
@@ -64,70 +72,59 @@ public class ConstructorPageBurger {
 
     public void cabinetTransition() {
 
-        userCreation.createUser();
-
         clickElement(headerLoginButton);
 
-        input(loginEmailField, "TestDave5@mail.ru");
-        input(loginPasswordField, "Tester1234323");
+        input(loginEmailField, email);
+        input(loginPasswordField, password);
         clickElement(loginButton);
 
         clickElement(headerLoginButton);
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(cabinetText));
-        assertTrue("Переход не удался", element.isDisplayed());
 
-        delete.deleteUser();
     }
 
     public void constructorTransition() {
 
-        userCreation.createUser();
+
 
         clickElement(headerLoginButton);
 
-        input(loginEmailField, "TestDave5@mail.ru");
-        input(loginPasswordField, "Tester1234323");
+        input(loginEmailField, email);
+        input(loginPasswordField, password);
         clickElement(loginButton);
 
         clickElement(headerLoginButton);
         clickElement(constructorHeaderButton);
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton));
-        assertTrue("Переход не удался", element.isDisplayed());
 
-        delete.deleteUser();
+
+
     }
 
     public void logoTransition() {
 
-        userCreation.createUser();
+
 
         clickElement(headerLoginButton);
 
-        input(loginEmailField, "TestDave5@mail.ru");
-        input(loginPasswordField, "Tester1234323");
+        input(loginEmailField, email);
+        input(loginPasswordField, password);
         clickElement(loginButton);
 
         clickElement(headerLoginButton);
         clickElement(burgerLogo);
 
-        WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton));
-        assertTrue("Переход не удался", element.isDisplayed());
 
-        delete.deleteUser();
+
     }
 
     public void cabinetExitButtonClick() {
 
-        userCreation.createUser();
+
 
         clickElement(headerLoginButton);
 
-        input(loginEmailField, "TestDave5@mail.ru");
-        input(loginPasswordField, "Tester1234323");
+        input(loginEmailField, email);
+        input(loginPasswordField, password);
         clickElement(loginButton);
 
         clickElement(headerLoginButton);
@@ -135,21 +132,16 @@ public class ConstructorPageBurger {
         wait.until(ExpectedConditions.visibilityOfElementLocated(cabinetText));
         clickElement(exitButton);
 
-        WebDriverWait wait2 = new WebDriverWait(driver, 5);
-        WebElement element = wait2.until(ExpectedConditions.visibilityOfElementLocated(loginButton));
-        assertTrue("Кнопка выход не работает", element.isDisplayed());
 
-        delete.deleteUser();
+
     }
 
     public void sauceTransition() {
 
         clickElement(constructorSauceSection);
+
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(allSauces));
-        assertTrue("Переход не удался", element.isDisplayed());
-
-
+        wait.until(ExpectedConditions.visibilityOfElementLocated(allSauces));
 
     }
 
@@ -158,8 +150,8 @@ public class ConstructorPageBurger {
         clickElement(constructorSauceSection);
         clickElement(constructorBunSection);
         WebDriverWait wait = new WebDriverWait(driver, 5);
-        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(allBuns));
-        assertTrue("Переход не удался", element.isDisplayed());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(allBuns));
+
 
 
 
@@ -175,4 +167,43 @@ public class ConstructorPageBurger {
 
     }
 
+    public By getFillingImage() {
+        return fillingImage;
+    }
+
+
+    public By getBunImage() {
+        return bunImage;
+    }
+
+
+    public By getSauceImage() {
+        return sauceImage;
+    }
+
+
+    public By getLoginButton() {
+        return loginButton;
+    }
+
+
+    public By getAllSauces() {
+        return allSauces;
+    }
+
+
+    public By getCabinetText() {
+        return cabinetText;
+    }
+
+    public By getOrderButton() {
+        return orderButton;
+    }
 }
+
+
+
+
+
+
+
